@@ -7,7 +7,18 @@ This is a simple Axum web server hosted integrated with Azure services and hoste
 - Azure PostgreSQL flexible server
 - Github Actions
 
-## Deploying to Azure
+## Result
+You can view the final result here [https://axumxazuretest.azurewebsites.net](https://axumxazuretest.azurewebsites.net)  <br/>
+Routes:
+  - GET `/`
+  - GET `/test`
+  - GET `/api`
+  - POST `/api`
+  - GET `/api/:id`
+  - PATCH `/api/:id`
+  - DELETE `/api/:id`
+
+## Recreating
 You can deploy this project using the following steps.
 1. Fork this repository to your github account
 2. Clone the fork to your local machine
@@ -20,5 +31,4 @@ You can deploy this project using the following steps.
 9. Head to Deployment Center, select the Container, Repository and tag, and set `Continuous Deployment` to "On"
 10. Set the name as `DATABASE_URL` and the value as  `postgresql://{username}:{password}@{database_server}:5432/{database_name: is "postgres" by default}`
 11. Make a small change to your code like adding a comment in the file and push to git to see your Action Running and your web server deployed
-
 
