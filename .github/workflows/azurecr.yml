@@ -6,7 +6,7 @@ name: Deploy to Azure Container Registry
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch: # To enable manual workflow trigger
 
 jobs:
