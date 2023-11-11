@@ -1,0 +1,29 @@
+
+# Action name
+name: Deploy to Azure Container Registry
+
+# Event triggers
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: # To enable manual workflow trigger
+
+jobs:
+  build_and_deploy_image_job:
+    runs-on: ubuntu-latest
+    name: Build and push docker image to Azure CR
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Build and deploy
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }} # default: index.docker.io
+          username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
+          password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+      - run: |
+          docker build . -t ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/${{ secrets.AZURE_CONTAINER_REGISTRY_IMAGE_NAME }}:latest
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/${{ secrets.AZURE_CONTAINER_REGISTRY_IMAGE_NAME }}:latest
