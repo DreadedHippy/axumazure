@@ -16,7 +16,7 @@ const PORT: u16 = 3000;
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
-    // Load in our environment variables
+    // Load in our environment variables...
     dotenv().ok();
 
     // Create the localhost address
