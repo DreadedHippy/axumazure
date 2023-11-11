@@ -1,4 +1,4 @@
-echo "Axum CMS backend server..."
+echo "Axum Azure backend server..."
 
 set -o allexport
 source .env set

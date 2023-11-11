@@ -1,6 +1,6 @@
 use axum::{Json, extract::{Path, State}};
 
-use crate::schemas::{CustomResponse, Ticket, CustomError, TicketForCreate, CustomResponseData, AppState, TicketForEdit};
+use crate::schemas::{TicketForCreate, CustomResponse, Ticket, CustomError, CustomResponseData, TicketForEdit, AppState};
 
 pub async fn handler_create_ticket(State(app_state): State<AppState>, Json(ticket_info): Json<TicketForCreate>) -> Result<Json<CustomResponse<Ticket>>, CustomError> {
 	// let ticket = Ticket {
@@ -57,7 +57,7 @@ pub async fn handler_get_tickets(State(app_state): State<AppState>) -> Result<Js
 }
 
 
-pub async fn handler_get_single_ticket(State(app_state): State<AppState>, Path(id): Path<i64>) -> Result<Json<CustomResponse<Ticket>>, CustomError> {
+pub async fn handler_get_single_ticket(State(app_state): State<AppState>,Path(id): Path<i64>) -> Result<Json<CustomResponse<Ticket>>, CustomError> {
 
 	let ticket = app_state.get_single_ticket(id).await.map_err(|_| {
 		CustomError::TicketGetOneError
@@ -107,3 +107,5 @@ pub async fn handler_delete_ticket(State(app_state): State<AppState>, Path(ticke
 
 	Ok(Json(response))
 }
+
+// postgresql://{admin name}:{admin password}@{server name}:{port -> 5432}/{postgres}
